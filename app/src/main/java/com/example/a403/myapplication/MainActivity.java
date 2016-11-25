@@ -4,24 +4,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView tv1, tv2;
-    CheckBox checkBox1;
     RadioButton r1,r2,r3;
-    Button btn1;
+    Button btn1, btn2;
     ImageView img1;
     RadioGroup rg;
+    Switch sw1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +26,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tv1 = (TextView)findViewById(R.id.textView1);
         tv2 = (TextView)findViewById(R.id.textView2);
-        checkBox1 = (CheckBox)findViewById(R.id.checkBox);
+        sw1 = (Switch)findViewById(R.id.switch1);
         rg = (RadioGroup)findViewById(R.id.radioGroup4);
         r1 = (RadioButton)findViewById(R.id.radioButton1);
         r2 = (RadioButton)findViewById(R.id.radioButton2);
         r3 = (RadioButton)findViewById(R.id.radioButton3);
-        btn1 = (Button)findViewById(R.id.button);
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
         img1 = (ImageView)findViewById(R.id.imageView);
 
-        checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        sw1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
@@ -46,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                     r2.setVisibility(View.VISIBLE);
                     r3.setVisibility(View.VISIBLE);
                     btn1.setVisibility(View.VISIBLE);
+                    btn2.setVisibility(View.VISIBLE);
+                    img1.setVisibility(View.VISIBLE);
                 }
                 else{
                     tv2.setVisibility(View.INVISIBLE);
@@ -53,22 +53,49 @@ public class MainActivity extends AppCompatActivity {
                     r2.setVisibility(View.INVISIBLE);
                     r3.setVisibility(View.INVISIBLE);
                     btn1.setVisibility(View.INVISIBLE);
+                    btn2.setVisibility(View.INVISIBLE);
+                    img1.setVisibility(View.INVISIBLE);
                 }
             }
         });
-        btn1.setOnClickListener(new View.OnClickListener() {
+        r1.setChecked(true);
+
+        r1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                img1.setVisibility(View.VISIBLE);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(r1.isChecked()){
                     img1.setImageResource(R.drawable.a);
                 }
-                else if(r2.isChecked()){
+            }
+        });
+        r2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(r2.isChecked()){
                     img1.setImageResource(R.drawable.b);
                 }
+            }
+        });
+        r3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(r3.isChecked()){
                     img1.setImageResource(R.drawable.c);
                 }
+            }
+        });
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sw1.setChecked(false);
+                r1.setChecked(true);
             }
         });
     }
